@@ -249,7 +249,7 @@
             131072});
             this.numericUpDownInhRate.Location = new System.Drawing.Point(223, 70);
             this.numericUpDownInhRate.Maximum = new decimal(new int[] {
-            3,
+            95,
             0,
             0,
             65536});

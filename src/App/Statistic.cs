@@ -224,7 +224,7 @@ namespace MAS
         * \param[in] infRate the rate of inhabitants
         * \param[in] virRate the rate of viruses
         */
-        public void WriteResults(Expert expert, float infRate, float virRate)
+        public void WriteResults(bool begin, Expert expert, float infRate, float virRate)
         {
             float[] inhStats;
             float[] virStats; 
@@ -240,12 +240,18 @@ namespace MAS
                 //file.WriteLine("timeStamp; elapsed time;width;height;rateInh;rateVir;iterations; cognitive;"
                 //      + "NmbOfInhabitants; durationOfDesease; nmbOfRelocationInfected; nmbOfRelocationNonInfected; nmbOfConflictsII; nmbOfConflictsINI; nmbOfConflictsININ; recoveryRate / cnt;"
                 //     + "nmbOfViruses; avgProbabilityOfInfection");
+                if(begin == true){
+                    file.WriteLine("timeStamp;elapsed time;width;height;rateInh;rateVir;iterations;cognitive;lifetimeVir;NmbOfInhabitants;durationOfDesease;nmbOfRelocationInfected;nmbOfRelocationNonInfected;nmbOfConflictsII;nmbOfConflictsINI;nmbOfConflictsININ;recoveryRate / cnt;nmbOfViruses;avgProbabilityOfInfection");
+                }
                 file.WriteLine(timeStamp + ";" + ElapsedTime + ";" + expert.Width + ";" + expert.Height + ";" + infRate + ";" + virRate + ";" + expert.SimulationTime + ";" + expert.Cognitive + ";" + expert.VirusesLifetime + ";"
                     + string.Join(";", inhStats) + ";" + /*"0;"+expert.InfectionRate);// */string.Join(";", virStats));
             }
 
             using (StreamWriter file = new StreamWriter("stats_log.csv", true))
             {
+                if(begin == true){
+                    file.WriteLine("Stamp;DataType;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31;32;33;34;35;36;37;38;39;40;41;42;43;44;45;46;47;48;49;50;51;52;53;54;55;56;57;58;59;60;61;62;63;64;65;66;67;68;69;70;71;72;73;74;75;76;77;78;79;80;81;82;83;84;85;86;87;88;89;90;91;92;93;94;95;96;97;98;99;100");
+                }
                 file.WriteLine(timeStamp + ";" + "cntDeletedViruses" + ";" + string.Join(";", cntDeletedViruses));
                 file.WriteLine(timeStamp + ";" + "cntLivingViruses" + ";" + string.Join(";", cntLivingViruses));
                 file.WriteLine(timeStamp + ";" + "cntCurInfected" + ";" + string.Join(";", cntCurInfected));
