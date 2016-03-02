@@ -1,0 +1,32 @@
+## Requirements for GUI run within docker.
+ifconfig / ipconfig: To get the VM IP address
+install brew
+install socat
+Install X11
+
+## Running the simulation
+# Build the container
+# Got to the MAS folder in the terminal after starting docker-machine
+docker build -t docker_mas .
+## Run X11/XQuartz Terminal
+# Give right to access the X11 server (when done xhost - to close the access to the X11 server)
+xhost +
+# Install and run socat to catch requests (Note that you have to find a free port. Here 7000)
+socat TCP-LISTEN:7000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"
+# Run docker bash
+docker run -ti --rm -e DISPLAY=192.168.99.1:0 -v /tmp/.X11-unix:/tmp/.X11-unix:rw docker_mas bash
+
+# To add an external data volume
+# Use -v path/to/volume:/data/
+
+# Got to src
+cd src
+
+# Run ipython notebook
+sudo ipython notebook &
+       
+# RUN MAS
+sudo mono MAS.exe
+
+# RUN all: Run MAS.exe and then ipython
+sudo ./run.sh

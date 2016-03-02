@@ -67,8 +67,14 @@ namespace MAS
                     stats = StartGame(expert, ca, ca1, viruses, h, w, virRate, inhRate, time);
                 else
                     stats = StartGameWithoutOutput(expert, ca, ca1, viruses, h, w, virRate, inhRate, time);
-
-                stats.WriteResults(expert, inhRate, virRate);
+                if (exp == 0)
+                {
+                    stats.WriteResults(true, expert, inhRate, virRate);
+                }else
+                {
+                    stats.WriteResults(false, expert, inhRate, virRate);
+                }
+                //stats.WriteResults(expert, inhRate, virRate);
                 pb_info.Value +=1;
             }
         }
